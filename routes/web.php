@@ -1,18 +1,24 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
+Route::get('/',function(){
     return view('welcome');
 });
+
+Route::get('home', [HomeController::class,'index'])->name('home.index');
+
+Route::get('registro',[UsuarioController::class,'form_registro'])->name('form_registro');
+
+Route::post('registro',[UsuarioController::class,'registro'])->name('registro');
+
+Route::get('inicio_sesion',[AuthController::class,'inicio_sesion'])->name('inicio_sesion');
+
+Route::post('inicio_sesion',[AuthController::class,'iniciar'])->name('auth.store');
+
+Route::get('usuario/{usuario}',[UsuarioController::class,'index'])->name("usuario.index");
+
+
